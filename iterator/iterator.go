@@ -8,6 +8,14 @@ type iterator interface {
 	Next() types.T
 }
 
+// region iterable
+
+type iterable interface {
+	iter() iterator
+}
+
+// end region iterable
+
 // region Sortable
 // Sortable use types.Comparator to sort []types.T 可以使用指定的 cmp 比较器对 list 进行排序
 // see sort.Interface
