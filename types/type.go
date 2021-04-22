@@ -34,3 +34,18 @@ type (
 		Right *TreeNode
 	}
 )
+
+// ------------------------------------------------------------------------------------
+
+type Integer int
+
+func (i Integer) CompareTo(o T) int {
+	var j = o.(Integer)
+	if i > j {
+		return 1
+	} else if i < j {
+		return -1
+	} else {
+		return 0
+	}
+}

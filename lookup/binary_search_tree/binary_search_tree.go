@@ -294,7 +294,6 @@ func keys(root *node, l, r types.K, res *[]types.K) {
 	if cmpRight < 0 {
 		keys(root.right, l, r, res)
 	}
-
 }
 
 func insert(root *node, k types.K, v types.V) *node {
