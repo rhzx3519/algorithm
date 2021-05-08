@@ -171,6 +171,24 @@ func (rbt *RedBlackTree) Select(k int) types.K {
 	return nil
 }
 
+// 返回大于或等于val的第一个元素位置。如果所有元素都小于val，则返回last的位置
+func (rbt *RedBlackTree) LowerBound(k types.K) types.K {
+	node := lower_bound(rbt.root, k)
+	if node != nil {
+		return node.key
+	}
+	return nil
+}
+
+// 返回大于val的第一个元素位置, 如果val大于数组中全部元素，返回的是last
+func (rbt *RedBlackTree) UpperBound(k types.K) types.K {
+	node := upper_bound(rbt.root, k)
+	if node != nil {
+		return node.key
+	}
+	return nil
+}
+
 // --------------------------------------------------------------------------------
 // private methods
 
@@ -517,6 +535,38 @@ func keys(root *node, l, r types.K, res *[]types.K) {
 	if cmpRight < 0 {
 		keys(root.right, l, r, res)
 	}
+}
+
+// 返回第一个大于等于k的节点
+func lower_bound(root *node, k types.K) (lb *node) {
+	for root != nil {
+		switch c := root.key.CompareTo(k); {
+		case c == 1:
+			lb = root
+			root = root.left
+		case c == -1:
+			root = root.right
+		default:
+			return root
+		}
+	}
+	return
+}
+
+// // 返回第一个大于key的节点
+func upper_bound(root *node, k types.K) (lb *node) {
+	for root != nil {
+		switch c := root.key.CompareTo(k); {
+		case c == 1:
+			lb = root
+			root = root.left
+		case c == -1:
+			root = root.right
+		default:
+			root = root.right
+		}
+	}
+	return
 }
 
 

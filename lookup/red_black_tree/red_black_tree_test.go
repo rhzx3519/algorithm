@@ -30,6 +30,32 @@ func TestRedBlackTree_Delete(t *testing.T) {
 
 }
 
+func TestRedBlackTree_LowerBound(t *testing.T) {
+	var rbt = getRbt()
+	assert.Equal(t, types.Integer(0), rbt.LowerBound(types.Integer(0)))
+	assert.Equal(t, types.Integer(3), rbt.LowerBound(types.Integer(1)))
+	assert.Equal(t, types.Integer(3), rbt.LowerBound(types.Integer(2)))
+	assert.Equal(t, types.Integer(3), rbt.LowerBound(types.Integer(3)))
+	assert.Equal(t, types.Integer(5), rbt.LowerBound(types.Integer(4)))
+
+	assert.Nil(t, rbt.LowerBound(types.Integer(8)))
+
+	assert.Equal(t, types.Integer(-15), rbt.LowerBound(types.Integer(-16)))
+}
+
+func TestRedBlackTree_UpperBound(t *testing.T) {
+	var rbt = getRbt()
+
+	assert.Equal(t, types.Integer(3), rbt.UpperBound(types.Integer(0)))
+	assert.Equal(t, types.Integer(3), rbt.UpperBound(types.Integer(1)))
+	assert.Equal(t, types.Integer(3), rbt.UpperBound(types.Integer(2)))
+	assert.Equal(t, types.Integer(5), rbt.UpperBound(types.Integer(3)))
+	assert.Equal(t, nil, rbt.UpperBound(types.Integer(7)))
+
+	assert.Equal(t, types.Integer(-15), rbt.UpperBound(types.Integer(-16)))
+}
+
+
 func getRbt() *RedBlackTree {
 	var rbt = &RedBlackTree{}
 	rbt.Put(types.Integer(0), "0")

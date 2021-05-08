@@ -30,6 +30,7 @@ type (
 
 	TreeNode struct {
 		Value T
+		Parent *TreeNode
 		Left *TreeNode
 		Right *TreeNode
 	}
